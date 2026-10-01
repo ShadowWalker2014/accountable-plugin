@@ -1,6 +1,6 @@
 # Accountable for ChatGPT
 
-Accountable keeps double-entry books for founders who run one or more companies. This plugin lets ChatGPT read and keep those books: reports, cash and runway, transactions, bills and invoices, and the month's close.
+Accountable is AI bookkeeping for startups: books kept by AI and closed every day, for founders who run one or more companies. This plugin lets ChatGPT read and keep those books: reports, cash and runway, transactions, bills and invoices, and the month's close.
 
 ## What it connects to
 

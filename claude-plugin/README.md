@@ -1,6 +1,6 @@
 # Accountable for Claude
 
-Accountable keeps double-entry books for founders who run one or more companies. This plugin connects Claude to those books and adds skills, short guides Claude follows for bookkeeping work: reading reports, categorizing transactions, closing a month, bills and invoices, taxes and undoing a change.
+Accountable is AI bookkeeping for startups: books kept by AI and closed every day, for founders who run one or more companies. This plugin connects Claude to those books and adds skills, short guides Claude follows for bookkeeping work: reading reports, categorizing transactions, closing a month, bills and invoices, taxes and undoing a change.
 
 ## What it connects to
 

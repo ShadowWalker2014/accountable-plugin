@@ -2,7 +2,7 @@
   "name": "accountable",
   "displayName": "Accountable",
   "version": "1.0.0",
-  "description": "Read and keep your companies' double-entry books in Accountable: reports, transactions, the close, bills and invoices, with every change logged and undoable.",
+  "description": "AI bookkeeping for startups: ask about cash, burn and runway, pull reports, categorize transactions, post entries and work the month's close. Every change is previewed, logged and can be undone.",
   "author": {
     "name": "Circo, Inc.",
     "email": "support@accountable.im",
