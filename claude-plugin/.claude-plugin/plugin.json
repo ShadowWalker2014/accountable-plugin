@@ -9,7 +9,16 @@
     "url": "https://accountable.im"
   },
   "homepage": "https://accountable.im/help/agents/claude",
+  "privacyPolicyUrl": "https://accountable.im/legal/privacy",
   "repository": "https://github.com/ShadowWalker2014/accountable-plugin",
   "license": "LicenseRef-Proprietary",
-  "keywords": ["accounting", "bookkeeping", "finance", "startups", "profit and loss", "runway", "close"]
+  "keywords": [
+    "accounting",
+    "bookkeeping",
+    "finance",
+    "startups",
+    "profit and loss",
+    "runway",
+    "close"
+  ]
 }
