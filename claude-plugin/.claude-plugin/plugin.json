@@ -1,0 +1,15 @@
+{
+  "name": "accountable",
+  "displayName": "Accountable",
+  "version": "1.0.0",
+  "description": "Read and keep your companies' double-entry books in Accountable: reports, transactions, the close, bills and invoices, with every change logged and undoable.",
+  "author": {
+    "name": "Circo, Inc.",
+    "email": "support@accountable.im",
+    "url": "https://accountable.im"
+  },
+  "homepage": "https://accountable.im/help/agents/claude",
+  "repository": "https://github.com/ShadowWalker2014/accountable-plugin",
+  "license": "LicenseRef-Proprietary",
+  "keywords": ["accounting", "bookkeeping", "finance", "startups", "profit and loss", "runway", "close"]
+}

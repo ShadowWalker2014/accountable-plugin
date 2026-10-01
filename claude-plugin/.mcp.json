@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "accountable": {
+      "type": "http",
+      "url": "https://accountable.im/mcp"
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "accountable",
+  "version": "1.0.0",
+  "description": "Read and keep your companies' double-entry books in Accountable: reports, transactions, the close, bills and invoices, with every change previewed, logged and undoable.",
+  "author": {
+    "name": "Circo, Inc.",
+    "email": "support@accountable.im",
+    "url": "https://accountable.im"
+  },
+  "homepage": "https://accountable.im",
+  "repository": "https://github.com/ShadowWalker2014/accountable-plugin",
+  "license": "LicenseRef-Proprietary",
+  "keywords": ["accounting", "bookkeeping", "finance", "startups", "profit and loss", "runway", "close"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Accountable",
+        "shortDescription": "Books for founders' companies",
+        "longDescription": "Accountable keeps double-entry books for founders who run one or more companies. With this plugin, ChatGPT reads and keeps those books for you.\n\nWhat you can do:\n- Ask how a company is doing: cash, net burn, runway and revenue, from the live books.\n- Pull a profit and loss, balance sheet, cash flow or trial balance for any months or exact days, on a cash or accrual basis, and ask why a number changed.\n- See which transactions still need a category, categorize them the way the company already does, and save a rule so a vendor never asks again.\n- Read bills, invoices and who owes what, and check how this month's close is going.\n- Post a journal entry, comment on a record, label an alert or save a planning scenario.\n\nHow changes work: every change is previewed first and changes nothing until you confirm it. Each change is logged with your name and ChatGPT's, follows your role in that company (a viewer can read but not change), and can be undone. Closed months stay closed.\n\nWho it is for: founders and the finance people who work with them, on an Accountable account. Sign in with your Accountable account and choose which companies ChatGPT may open, and whether it may only read.\n\nLimitations: it never moves money. It records payments that already happened but cannot pay a bill, send a transfer or file taxes. Sending invoices, closing a month, imports and settings stay in Accountable's app. Free plans can read the books but not change them through ChatGPT.",
+        "developerName": "Circo, Inc.",
+        "category": "Finance",
+        "capabilities": [
+          "Read profit and loss, balance sheet, cash flow and trial balance",
+          "Answer cash, burn, runway and revenue questions",
+          "Explain why a number changed between months",
+          "Find and categorize transactions, and save vendor rules",
+          "Read bills, invoices and receivables aging",
+          "Check the month's close status and checklist",
+          "Post journal entries, previewed first",
+          "Undo any change"
+        ],
+        "websiteURL": "https://accountable.im",
+        "supportURL": "https://accountable.im/help/agents/chatgpt",
+        "privacyPolicyURL": "https://accountable.im/legal/privacy",
+        "termsOfServiceURL": "https://accountable.im/legal/terms",
+        "defaultPrompt": [
+          "How much cash do we have, what is our burn, and how many months of runway is that?",
+          "Show last month's profit and loss and explain what changed from the month before.",
+          "Which transactions still need a category? Categorize them the way we usually do."
+        ],
+        "brandColor": "#5a64e8",
+        "brandColorDark": "#8a93ff",
+        "logo": "./assets/icon.png",
+        "composerIcon": "./assets/composer-icon.png"
+      },
+      "onboardingSkill": "./skills/start-here/SKILL.md",
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Cash, burn and runway for one company",
+              "prompt": "How much cash does Northwind Labs have, what was its net burn last month, and how many months of runway is that?",
+              "tools_triggered": "list_companies, get_metrics",
+              "expected_behavior": "Calls get_metrics for Northwind Labs and answers with its cash balance, last month's net burn and runway in months, quoting the amounts from the books. Changes nothing."
+            },
+            {
+              "description": "Profit and loss for a quarter, with what drove a change",
+              "prompt": "Show Northwind Labs' profit and loss for last quarter and tell me which expense grew the most from the month before.",
+              "tools_triggered": "get_report, explain_change",
+              "expected_behavior": "Calls get_report with report pl for the last full quarter and shows revenue, expenses by category and net income. Calls explain_change to name the expense line that grew most month over month and the transactions behind it. Mentions any readiness warnings the report returns. Changes nothing."
+            },
+            {
+              "description": "Who owes the company money",
+              "prompt": "Which customers owe Northwind Labs money, and how overdue are those invoices?",
+              "tools_triggered": "get_aging, list_invoices",
+              "expected_behavior": "Calls get_aging with kind receivable and lists each customer's open balance by how many days overdue, with the total. May call list_invoices for invoice numbers. Changes nothing and sends nothing."
+            },
+            {
+              "description": "Categorize transactions, previewed first",
+              "prompt": "Which Northwind Labs transactions still need a category? Categorize the first one as Software and Subscriptions.",
+              "tools_triggered": "list_transactions, list_accounts, categorize_transactions",
+              "expected_behavior": "Calls list_transactions with uncategorized_only true and lists them. Calls categorize_transactions with mode preview for the first transaction and shows the before and after category. After the user confirms, calls categorize_transactions with mode apply and the preview_id, and reports the change_id."
+            },
+            {
+              "description": "Post a journal entry, then undo it",
+              "prompt": "In Northwind Labs, accrue $1,200 of legal fees for this month as a journal entry. Then undo it.",
+              "tools_triggered": "list_accounts, create_journal_entry, undo_change",
+              "expected_behavior": "Finds Legal Fees (6300) and Accrued Expenses (2300) with list_accounts. Previews a balanced entry (debit Legal Fees $1,200, credit Accrued Expenses $1,200) with create_journal_entry, applies it after the user confirms, and reports the change_id. Then previews and applies undo_change with that change_id, and confirms the entry was reversed."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Paying a bill moves money, which the plugin never does",
+              "prompt": "Pay Northwind Labs' AWS bill from the Mercury checking account."
+            },
+            {
+              "description": "Transferring money between companies",
+              "prompt": "Transfer $5,000 from Northwind Labs to Halcyon Holdings."
+            },
+            {
+              "description": "A request unrelated to bookkeeping",
+              "prompt": "What's the weather in Denver this weekend?"
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "This plugin does not sell products or process payments."
+      },
+      "publication": {
+        "countries": ["US"],
+        "release_notes": "First release: read reports, metrics, transactions, bills, invoices and the close; categorize transactions, answer review questions, post journal entries, comment, label alerts and save planning scenarios, each previewed first and undoable."
+      }
+    }
+  }
+}
